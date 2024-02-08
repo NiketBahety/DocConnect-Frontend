@@ -1,0 +1,77 @@
+.doctor-card {
+  padding: 20px;
+  margin: 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: flex-start; */
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.doctor-card .left,
+.doctor-card .right {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.doctor-card .left {
+  align-items: flex-start;
+  gap: 20px;
+}
+.doctor-card .right {
+  align-items: flex-end;
+}
+.doctor-card .left .personal-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.personal-info .name {
+  color: #0024a6;
+  font-weight: 500;
+  font-size: 22px;
+}
+.personal-info .education {
+  font-weight: 300;
+  font-size: 17px;
+  padding: 10px 0;
+}
+.left .fees {
+  font-weight: 300;
+  font-size: 18px;
+  color: #3b3b3b;
+}
+.left .fees span {
+  font-weight: 500;
+}
+.left .address {
+  font-weight: 400;
+  font-size: 18px;
+  padding: 10px 0;
+}
+.rating-box .btn {
+  background-color: #00a3ff;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  gap: 5px;
+}
+.rating-box .btn i {
+  font-size: 14px;
+}
+.book-btn .btn {
+  background-color: transparent;
+  border: 1px solid #0024a6;
+  padding: 10px 25px;
+  color: #0024a6;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 5px;
+}
