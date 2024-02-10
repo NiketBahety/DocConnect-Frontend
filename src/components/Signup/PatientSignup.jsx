@@ -1,6 +1,8 @@
 import { React, useState } from "react";
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
+
 axios.defaults.withCredentials = true;
 
 const API = axios.create({
@@ -8,6 +10,8 @@ const API = axios.create({
 });
 
 const PatientSignup = ({ setCurrent }) => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,6 +41,7 @@ const PatientSignup = ({ setCurrent }) => {
           "Profile",
           JSON.stringify({ ...data.data.data.user, type: "patient" })
         );
+        navigate("/home");
       } catch (err) {
         console.log(err);
       }

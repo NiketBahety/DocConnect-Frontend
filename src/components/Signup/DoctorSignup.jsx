@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import moment from "moment";
+// import moment from "moment";
+
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
@@ -9,6 +11,8 @@ const API = axios.create({
 });
 
 const DoctorSignup = ({ setCurrent }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     function createOption(value, text) {
       var option = document.createElement("option");
@@ -90,6 +94,8 @@ const DoctorSignup = ({ setCurrent }) => {
           "Profile",
           JSON.stringify({ ...data.data.data.user, type: "doctor" })
         );
+
+        navigate("/home");
       } catch (err) {
         console.log(err);
       }

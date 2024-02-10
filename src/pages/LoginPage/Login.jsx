@@ -3,6 +3,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import axios from "axios";
 import "./login.css";
 
+import { useNavigate } from "react-router-dom";
+
 axios.defaults.withCredentials = true;
 
 const API = axios.create({
@@ -13,6 +15,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("Patient");
+
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -27,6 +31,7 @@ const Login = () => {
           "Profile",
           JSON.stringify({ ...data.data.data.user, type: type.toLowerCase() })
         );
+        navigate("/home");
       } catch (err) {
         console.log(err);
       }

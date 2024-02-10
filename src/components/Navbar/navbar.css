@@ -52,3 +52,11 @@ nav .buttons {
     font-size: 0.8rem;
   }
 }
+.profile-btn {
+  background-color: #f5f5f5;
+  padding: 0;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  color: #0024a6;
+}
