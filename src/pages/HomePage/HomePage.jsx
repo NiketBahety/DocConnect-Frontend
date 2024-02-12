@@ -5,7 +5,13 @@ const HomePage = () => {
   let user = JSON.parse(localStorage.getItem("Profile"));
 
   return (
-    <div>{user.type === "patient" ? <PatientHomePage /> : <h1>Nope</h1>}</div>
+    <div>
+      {user.type === "patient" ? (
+        <PatientHomePage />
+      ) : (
+        <h1>This page is not ready yet. Try signing in as a patient.</h1>
+      )}
+    </div>
   );
 };
 

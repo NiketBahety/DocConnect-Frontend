@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./navbar.css";
 
+import { useNavigate } from "react-router-dom";
+
 const Navbar = ({ active }) => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("Profile")));
+  const [user, setUser] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("Profile"))
+      setUser(JSON.parse(localStorage.getItem("Profile")));
+  }, []);
 
   return (
     <nav>
@@ -11,11 +19,22 @@ const Navbar = ({ active }) => {
       </a>
       <div className="buttons">
         {user ? (
-          <a href="/profile">
-            <button className="btn profile-btn">
-              <i className="fa-solid fa-user"></i>
+          <>
+            <button
+              className="btn"
+              onClick={() => {
+                localStorage.setItem("Profile", "");
+                navigate("/");
+              }}
+            >
+              Logout
             </button>
-          </a>
+            <a href="/profile">
+              <button className="btn profile-btn">
+                <i className="fa-solid fa-user"></i>
+              </button>
+            </a>
+          </>
         ) : (
           <>
             <a href="/signup">
