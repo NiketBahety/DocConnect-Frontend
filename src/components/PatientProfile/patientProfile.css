@@ -1,0 +1,33 @@
+.profile .personal-info {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  border-radius: 3px;
+  min-width: min(100%, 500px);
+  margin-bottom: 50px;
+}
+.profile .personal-info .heading {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 40px;
+}
+.profile .personal-info .row {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 20px;
+  border-bottom: 1px solid #ccc;
+  padding: 20px 0;
+}
+.profile .personal-info .row .sub-heading {
+  font-weight: 500;
+  width: 30%;
+}
+.profile .personal-info .row .value {
+  color: #4e4e4e;
+}
+.profile .personal-info.doctor .sub-heading {
+  width: auto;
+  margin-right: 20px;
+}

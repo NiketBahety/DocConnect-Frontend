@@ -4,6 +4,7 @@ import axios from "axios";
 import "./login.css";
 
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 axios.defaults.withCredentials = true;
 
@@ -31,8 +32,10 @@ const Login = () => {
           "Profile",
           JSON.stringify({ ...data.data.data.user, type: type.toLowerCase() })
         );
+        toast.success("Succesfully logged in!");
         navigate("/home");
       } catch (err) {
+        toast.error("Incorrect email or password!");
         console.log(err);
       }
     }

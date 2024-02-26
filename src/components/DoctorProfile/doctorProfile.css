@@ -1,0 +1,7 @@
+.personal-info {
+  margin-top: 20px;
+}
+.doctor.past {
+  max-height: 300px;
+  overflow-y: scroll;
+}

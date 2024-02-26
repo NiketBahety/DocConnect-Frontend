@@ -3,6 +3,7 @@ import axios from "axios";
 // import moment from "moment";
 
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 axios.defaults.withCredentials = true;
 
@@ -89,14 +90,14 @@ const DoctorSignup = ({ setCurrent }) => {
           address,
           timeSlot: `${n(h1)}:${n(m1)}-${n(h2)}:${n(m2)}`,
         });
-        console.log(data.data.data.user);
+        toast.success("Succesfully signed up and logged in!");
         localStorage.setItem(
           "Profile",
           JSON.stringify({ ...data.data.data.user, type: "doctor" })
         );
-
         navigate("/home");
       } catch (err) {
+        toast.error("There was an error! Please try later.");
         console.log(err);
       }
     }

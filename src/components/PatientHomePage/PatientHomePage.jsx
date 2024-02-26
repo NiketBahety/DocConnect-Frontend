@@ -14,6 +14,7 @@ const API = axios.create({
 const PatientHomePage = () => {
   const [doctors, setDoctors] = useState([]);
   const [sort, setSort] = useState("");
+  const [date, setDate] = useState(moment());
   const [beforeTime, setBeforeTime] = useState(
     moment().endOf("day").set("second", 0)
   );
@@ -104,6 +105,7 @@ const PatientHomePage = () => {
                     min={moment(Date.now()).format("yyyy-MM-DD")}
                     max={moment(Date.now()).add(7, "days").format("yyyy-MM-DD")}
                     onChange={(e) => {
+                      setDate(moment(e.target.value));
                       setBeforeTime(
                         moment(beforeTime).set({
                           year: e.target.value.substring(0, 4),
@@ -158,7 +160,7 @@ const PatientHomePage = () => {
           </div>
           <div className="right-cont">
             {doctors.map((doctor) => (
-              <DoctorCard key={doctor._id} doctor={doctor} />
+              <DoctorCard key={doctor._id} doctor={doctor} date={date} />
             ))}
           </div>
         </div>

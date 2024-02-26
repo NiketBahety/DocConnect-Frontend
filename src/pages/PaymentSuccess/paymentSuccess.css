@@ -1,0 +1,40 @@
+.congo {
+  font-size: 24px;
+  color: green;
+  font-weight: 600;
+}
+.ref {
+  color: rgb(83, 83, 83);
+  font-weight: 300;
+}
+.heading {
+  color: #444444;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: left;
+  width: 100%;
+}
+.doc-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+}
+.doc-card .row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+}
+.doc-card .head {
+  font-weight: 300;
+  color: #333;
+  font-size: 18px;
+}
+.doc-card .d-name {
+  font-size: 18px;
+  color: #4d4d4d;
+  font-weight: 500;
+}

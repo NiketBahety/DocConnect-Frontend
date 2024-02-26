@@ -1,0 +1,27 @@
+.doctors-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.doctors-table th,
+.doctors-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+}
+
+.doctors-table th {
+  background-color: #0024a6;
+  color: white;
+}
+
+.doctors-table th:not(:last-child),
+.doctors-table td:not(:last-child) {
+  padding-right: 20px;
+}
+
+.doctors-table td.address {
+  max-width: 200px;
+  word-wrap: break-word;
+}

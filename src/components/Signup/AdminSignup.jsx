@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 axios.defaults.withCredentials = true;
 
 const API = axios.create({
@@ -25,13 +27,14 @@ const AdminSignup = ({ setCurrent }) => {
           email,
           password,
         });
-        console.log(data.data.data.user);
+        toast.success("Succesfully signed up and logged in!");
         localStorage.setItem(
           "Profile",
           JSON.stringify({ ...data.data.data.user, type: "admin" })
         );
         navigate("/home");
       } catch (err) {
+        toast.error("There was an error! Please try later.");
         console.log(err);
       }
     }
