@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
-import {toast} from 'react-toastify';
+import { toast } from "react-toastify";
 
 axios.defaults.withCredentials = true;
 
@@ -21,10 +21,36 @@ const PatientSignup = ({ setCurrent }) => {
   const [bloodType, setBloodType] = useState("");
   const [gender, setGender] = useState("");
   const [medicalHistory, setMedicalHistory] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  const validateNumber = (phone) => {
+    return (
+      phone.length === 10 &&
+      String(phone)
+        .toLowerCase()
+        .match(/^[6-9]\d{9}$/)
+    );
+  };
 
   const handleClick = async () => {
     if (!name || !email || !password || !phone) {
       alert("Please fill all required fields");
+    } else if (!validateEmail(email) || !validateNumber(phone)) {
+      let updatedError = { ...errors };
+      if (!validateEmail(email)) updatedError.email = true;
+      else updatedError.email = false;
+      if (!validateNumber(phone)) updatedError.phone = true;
+      else updatedError.phone = false;
+
+      setErrors(updatedError);
     } else {
       try {
         const data = await API.post("/auth/patient/signup", {
@@ -79,10 +105,16 @@ const PatientSignup = ({ setCurrent }) => {
               Email
             </label>
             <input
-              type="text"
+              type="email"
               id="email"
+              required
               onChange={(e) => setEmail(e.target.value)}
             />
+            {errors.email ? (
+              <p className="error">Invalid email address!</p>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="input-grp">
             <label htmlFor="phone" className="required">
@@ -93,6 +125,11 @@ const PatientSignup = ({ setCurrent }) => {
               id="phone"
               onChange={(e) => setPhone(e.target.value)}
             />
+            {errors.phone ? (
+              <p className="error">Invalid phone number!</p>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div className="input-row">
@@ -135,7 +172,7 @@ const PatientSignup = ({ setCurrent }) => {
             />
           </div>
         </div>
-        <button className="btn signup-btn" onClick={handleClick}>
+        <button className="btn signup-btn" onClick={handleClick} type="submit">
           Signup
         </button>
       </div>

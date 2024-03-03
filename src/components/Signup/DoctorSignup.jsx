@@ -53,6 +53,25 @@ const DoctorSignup = ({ setCurrent }) => {
   const [m1, setM1] = useState(0);
   const [h2, setH2] = useState("");
   const [m2, setM2] = useState(0);
+  const [errors, setErrors] = useState({});
+
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  const validateNumber = (phone) => {
+    if (!phone) return true;
+    return (
+      phone.length === 10 &&
+      String(phone)
+        .toLowerCase()
+        .match(/^[6-9]\d{9}$/)
+    );
+  };
 
   const handleClick = async () => {
     if (
@@ -71,6 +90,14 @@ const DoctorSignup = ({ setCurrent }) => {
       (parseInt(h1) === parseInt(h2) && parseInt(m1) >= parseInt(m2))
     ) {
       alert("Please input valid timings. From cannot be less than to.");
+    } else if (!validateEmail(email) || !validateNumber(phone)) {
+      let updatedError = { ...errors };
+      if (!validateEmail(email)) updatedError.email = true;
+      else updatedError.email = false;
+      if (!validateNumber(phone)) updatedError.phone = true;
+      else updatedError.phone = false;
+
+      setErrors(updatedError);
     } else {
       try {
         function n(num, len = 2) {
@@ -138,6 +165,11 @@ const DoctorSignup = ({ setCurrent }) => {
               id="email"
               onChange={(e) => setEmail(e.target.value)}
             />
+            {errors.email ? (
+              <p className="error">Invalid email address!</p>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="input-grp">
             <label htmlFor="phone">Phone Number</label>
@@ -146,6 +178,11 @@ const DoctorSignup = ({ setCurrent }) => {
               id="phone"
               onChange={(e) => setPhone(e.target.value)}
             />
+            {errors.phone ? (
+              <p className="error">Invalid phone number!</p>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div className="input-row">

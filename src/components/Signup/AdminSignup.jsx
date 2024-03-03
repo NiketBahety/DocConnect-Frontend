@@ -14,12 +14,27 @@ const AdminSignup = ({ setCurrent }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
+
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
 
   const handleClick = async () => {
     if (!name || !email || !password) {
       alert("Please fill all required fields");
+    } else if (!validateEmail(email)) {
+      let updatedError = { ...errors };
+      if (!validateEmail(email)) updatedError.email = true;
+      else updatedError.email = false;
+
+      setErrors(updatedError);
     } else {
       try {
         const data = await API.post("/auth/admin/signup", {
@@ -65,6 +80,11 @@ const AdminSignup = ({ setCurrent }) => {
               id="email"
               onChange={(e) => setEmail(e.target.value)}
             />
+            {errors.email ? (
+              <p className="error">Invalid email address!</p>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div className="input-row">
